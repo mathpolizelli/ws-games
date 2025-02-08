@@ -13,6 +13,14 @@ export const usetictactoeStore = defineStore("tictactoe", () => {
 
     const playIndex = ref(0);
 
+    const enterRoom = (room: string) => {
+        socket.emit("enterRoom", room);
+    };
+
+    const leaveRoom = (room: string) => {
+        socket.emit("leaveRoom", room);
+    };
+
     const changeSquare = (row: number, column: number, value: number) => {
         board.value[row][column] = value;
         const currentBoard = board.value;
@@ -67,6 +75,8 @@ export const usetictactoeStore = defineStore("tictactoe", () => {
         board,
         playIndex,
         isGameOver,
+        enterRoom,
+        leaveRoom,
         changeSquare,
         checkWinner,
         restartGame,

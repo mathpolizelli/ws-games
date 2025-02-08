@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>This is an about page</h1>
+        <h1>TicTacToe</h1>
         <ttt-board></ttt-board>
         <v-dialog v-model="gameOverModal" width="400px">
             <v-card class="d-flex justify-center">

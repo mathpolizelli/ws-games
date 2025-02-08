@@ -37,6 +37,6 @@ const inputRules = { required: (value) => !!value || "Field is required" };
 
 const createUser = () => {
     localStorage.setItem("user", text.value);
-    router.push({ name: "tictactoe" });
+    router.push({ name: "tictactoerooms" });
 };
 </script>

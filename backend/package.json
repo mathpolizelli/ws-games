@@ -4,6 +4,7 @@
   "description": "socket.io for browser games",
   "type": "module",
   "dependencies": {
+    "@socket.io/admin-ui": "^0.5.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "node-http": "^0.0.5",
