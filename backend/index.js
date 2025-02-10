@@ -32,8 +32,11 @@ io.on("connection", (socket) => {
     socket.on("changeSquare", (currentBoard, currentPlayer) => {
         console.log(currentBoard);
         console.log(currentPlayer);
-        console.log(socket.rooms);
-        io.emit("changeSquare", currentBoard, currentPlayer);
+        io.to(Array.from(socket.rooms)[1]).emit(
+            "changeSquare",
+            currentBoard,
+            currentPlayer
+        );
     });
 
     socket.on("enterRoom", (room) => {

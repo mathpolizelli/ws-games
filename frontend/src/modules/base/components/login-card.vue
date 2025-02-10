@@ -6,22 +6,25 @@
         >
             <v-card-title>Welcome to WS games!</v-card-title>
             <v-card-subtitle>What is you name?</v-card-subtitle>
-            <v-text-field
-                v-model="text"
-                density="comfortable"
-                :rules="[inputRules.required]"
-                variant="outlined"
-                width="100%"
-                class="mt-4 mb-2"
-            ></v-text-field>
-            <v-btn
-                block
-                :disabled="!text"
-                variant="outlined"
-                @click="createUser"
-            >
-                Play
-            </v-btn>
+            <v-form class="w-100" @submit.prevent>
+                <v-text-field
+                    v-model="text"
+                    density="comfortable"
+                    :rules="[inputRules.required]"
+                    variant="outlined"
+                    width="100%"
+                    class="mt-4 mb-2"
+                ></v-text-field>
+                <v-btn
+                    block
+                    :disabled="!text"
+                    variant="outlined"
+                    type="submit"
+                    @click="createUser"
+                >
+                    Play
+                </v-btn>
+            </v-form>
         </v-card>
     </div>
 </template>

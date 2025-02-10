@@ -4,6 +4,7 @@ import { socket } from "@/plugins/websocket";
 
 export const usetictactoeStore = defineStore("tictactoe", () => {
     const player = ref({ id: Number });
+    const room = ref('')    
 
     const board = ref([
         [0, 0, 0],
