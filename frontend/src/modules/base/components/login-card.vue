@@ -33,13 +33,17 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
+import { usetictactoeStore } from "@/modules/tictactoe/ttt-store";
+
 const router = useRouter();
+const tictactoeStore = usetictactoeStore();
 
 const text = ref("");
 const inputRules = { required: (value) => !!value || "Field is required" };
 
 const createUser = () => {
     localStorage.setItem("user", text.value);
+    tictactoeStore.player.name = localStorage.getItem("user");
     router.push({ name: "tictactoerooms" });
 };
 </script>

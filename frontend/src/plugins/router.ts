@@ -52,6 +52,8 @@ router.beforeEach((to, from, next) => {
     if (to.name != "login" && localStorage.getItem("user") == null)
         return next({ name: "login" });
 
+    // if(to.name == "tictactoeboard") tictactoeStore.
+
     if(from.name == "tictactoeboard") tictactoeStore.leaveRoom("room"+route.params.id)
 
     next();

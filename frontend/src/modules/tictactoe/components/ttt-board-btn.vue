@@ -33,6 +33,7 @@ const squareValue = computed(
 );
 
 const squareSymbol = computed(() => {
+    console.log(tictactoeStore.player.id);
     if (squareValue.value == 0) return "";
     return squareValue.value == 1 ? "X" : "O";
 });

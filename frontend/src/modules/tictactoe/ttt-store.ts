@@ -3,8 +3,12 @@ import { defineStore } from "pinia";
 import { socket } from "@/plugins/websocket";
 
 export const usetictactoeStore = defineStore("tictactoe", () => {
-    const player = ref({ id: Number });
-    const room = ref('')    
+    const player = ref({ id: Number, name: '' });
+    console.log(player.value)
+    const room = ref({
+        name: String,
+        players: Array
+    })    
 
     const board = ref([
         [0, 0, 0],
@@ -25,7 +29,7 @@ export const usetictactoeStore = defineStore("tictactoe", () => {
     const changeSquare = (row: number, column: number, value: number) => {
         board.value[row][column] = value;
         const currentBoard = board.value;
-        const currentPlayer = player.value;
+        const currentPlayer = player.value.id;
         socket.emit("changeSquare", currentBoard, currentPlayer);
     };
 

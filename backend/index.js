@@ -24,7 +24,6 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
-    console.log(socket.rooms);
     socket.on("disconnect", () => {
         console.log(`User disconnected: ${socket.id}`);
     });
@@ -42,7 +41,8 @@ io.on("connection", (socket) => {
     socket.on("enterRoom", (room) => {
         console.log(room);
         socket.join(room);
-        console.log(socket.rooms);
+
+        console.log(io.sockets.adapter.rooms.get(room)?.size || 0);
     });
 
     socket.on("leaveRoom", (room) => {
