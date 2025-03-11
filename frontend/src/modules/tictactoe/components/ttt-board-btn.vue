@@ -2,7 +2,7 @@
     <v-btn
         @click="clickSquare"
         :disabled="
-            squareValue === 0 && lastPlayAuthor != tictactoeStore.player
+            squareValue === 0 && lastPlayAuthorId != appStore.player.id
                 ? false
                 : true
         "
@@ -17,6 +17,7 @@
 import { computed, ref } from "vue";
 
 import { socket } from "@/plugins/websocket";
+import { useAppStore } from "@/app.store";
 import { usetictactoeStore } from "../ttt-store.ts";
 
 const props = defineProps({
@@ -24,16 +25,16 @@ const props = defineProps({
     column: Number,
 });
 
+const appStore = useAppStore();
 const tictactoeStore = usetictactoeStore();
 
-const lastPlayAuthor = ref();
+const lastPlayAuthorId = ref();
 
 const squareValue = computed(
     () => tictactoeStore.board[props.row][props.column]
 );
 
 const squareSymbol = computed(() => {
-    console.log(tictactoeStore.player.id);
     if (squareValue.value == 0) return "";
     return squareValue.value == 1 ? "X" : "O";
 });
@@ -47,7 +48,7 @@ const clickSquare = () => {
 };
 
 socket.on("changeSquare", (currentBoard, currentPlayer) => {
-    lastPlayAuthor.value = currentPlayer;
+    lastPlayAuthorId.value = currentPlayer;
 });
 </script>
 

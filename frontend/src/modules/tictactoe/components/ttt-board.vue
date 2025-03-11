@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 
 import { usetictactoeStore } from "../ttt-store.ts";
 import { socket } from "@/plugins/websocket";
@@ -74,9 +74,17 @@ const tictactoeStore = usetictactoeStore();
 
 const board = computed(() => tictactoeStore.board);
 
-socket.on("changeSquare", (currentBoard, currentPlayer) => {
+const handleChangeSquare = (currentBoard: any, currentPlayer: any) => {
     tictactoeStore.board = currentBoard;
     tictactoeStore.playIndex++;
+};
+
+onMounted(() => {
+    socket.on("changeSquare", handleChangeSquare);
+});
+
+onUnmounted(() => {
+    socket.off("changeSquare", handleChangeSquare);
 });
 </script>
 

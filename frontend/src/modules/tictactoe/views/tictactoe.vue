@@ -19,18 +19,28 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
+import { useRoute } from "vue-router";
 
+import { useAppStore } from "@/app.store";
 import { usetictactoeStore } from "../ttt-store";
 import { socket } from "@/plugins/websocket";
 
 import TttBoard from "@/modules/tictactoe/components/ttt-board.vue";
 
+const appStore = useAppStore();
 const tictactoeStore = usetictactoeStore();
+const route = useRoute();
 
 const gameOverModal = computed(() => tictactoeStore.isGameOver);
 
 onMounted(() => {
-    tictactoeStore.player = socket.id;
+    appStore.player.id = socket.id;
+
+    tictactoeStore.enterRoom("room" + route.params.id);
+});
+
+onUnmounted(() => {
+    tictactoeStore.leaveRoom("room" + route.params.id);
 });
 </script>

@@ -43,6 +43,11 @@ io.on("connection", (socket) => {
         socket.join(room);
 
         console.log(io.sockets.adapter.rooms.get(room)?.size || 0);
+
+        io.to(room).emit("roomJoined", {
+            room,
+            players: io.sockets.adapter.rooms.get(room)?.size || 0,
+        });
     });
 
     socket.on("leaveRoom", (room) => {

@@ -17,15 +17,20 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
+
 import { socket } from "@/plugins/websocket";
+import { useAppStore } from "@/app.store";
+
+const appStore = useAppStore();
 
 onMounted(() => {
-    socket.on("connected", () => {
+    socket.on("connect", () => {
         console.log("CONNECTED ", socket.id);
+        appStore.player.id = socket.id;
+    });
 
-        socket.on("disconnect", () => {
-            console.log("Disconnected from server");
-        });
+    socket.on("disconnect", () => {
+        console.log("Disconnected from server");
     });
 });
 </script>

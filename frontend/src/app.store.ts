@@ -3,9 +3,11 @@ import { defineStore } from "pinia";
 import { socket } from "@/plugins/websocket";
 
 export const useAppStore = defineStore("app", () => {
-    const isLoggedIn = computed(() => {
-        return localStorage.getItem("user") != null 
-    })
+    const player = ref({ id: "", name: localStorage.getItem("user") });
 
-    return {isLoggedIn};
+    const isLoggedIn = computed(() => {
+        return localStorage.getItem("user") != null;
+    });
+
+    return { player, isLoggedIn };
 });

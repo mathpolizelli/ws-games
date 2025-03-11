@@ -1,6 +1,7 @@
 <template>
     <v-list-item :value="id" @click="navigateToRoom">
         Room {{ id }}
+        <template v-slot:append>0 / 2</template>
     </v-list-item>
 </template>
 
@@ -20,7 +21,6 @@ const router = useRouter();
 const tictactoeStore = usetictactoeStore();
 
 const navigateToRoom = () => {
-    tictactoeStore.enterRoom("room" + props.id);
     router.push({ name: "tictactoeboard", params: { id: props.id } });
 };
 </script>
